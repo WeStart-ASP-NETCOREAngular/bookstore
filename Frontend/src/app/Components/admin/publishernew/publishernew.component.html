@@ -1,0 +1,47 @@
+<p>publishernew works!</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <form [formGroup]="AddPublisherForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="name">اسم دار النشر</label>
+          <input
+            formControlName="name"
+            class="form-control"
+            type="text"
+            id="name"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="logo">شعار دار النشر</label>
+          <input
+            (change)="onFileChange($event)"
+            formControlName="file"
+            class="form-control"
+            type="file"
+            id="logo"
+          />
+        </div>
+        <div class="mb-4">
+          <div class="progress">
+            <div
+              class="progress-bar"
+              role="progressbar"
+              aria-label="Example with label"
+              [ngStyle]="{ width: progressValue }"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              {{ progressValue }}
+            </div>
+          </div>
+        </div>
+        <div class="mb-4">
+          <img class="img-thumbnail" [src]="imageSrc || 'https://via.placeholder.com/200'" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">اضافة دار النشر</button>
+      </form>
+    </div>
+  </div>
+</div>
