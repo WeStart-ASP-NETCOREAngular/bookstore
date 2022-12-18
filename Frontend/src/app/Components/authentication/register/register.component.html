@@ -1,0 +1,133 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <h5 class="card-header">
+          تسجيل مستخدم جديد
+        </h5>
+        <div class="card-body">
+
+          <div *ngIf="showError" class="alert alert-danger" role="alert">
+            <span [innerHTML]="errorMessage"></span>
+          </div>
+
+          <form
+            [formGroup]="registerForm"
+            autocomplete="off"
+            novalidate
+            (ngSubmit)="registerUser()"
+          >
+            <div class="mb-3 row">
+              <label for="firstName" class="col-form-label col-sm-2"
+                >الاسم الاول:</label
+              >
+              <div class="col-md-5">
+                <input
+                  type="text"
+                  id="firstName"
+                  formControlName="firstName"
+                  class="form-control"
+                />
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="lastName" class="col-form-label col-sm-2"
+                >الاسم الاخير:</label
+              >
+              <div class="col-md-5">
+                <input
+                  type="text"
+                  id="lastName"
+                  formControlName="lastName"
+                  class="form-control"
+                />
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="email" class="col-form-label col-sm-2">البريد الاكتروني:</label>
+              <div class="col-md-5">
+                <input
+                  type="email"
+                  id="email"
+                  formControlName="email"
+                  class="form-control"
+                />
+              </div>
+              <div class="col-md-5">
+                <em
+                  *ngIf="validateControl('email') && hasError('email', 'email')"
+                  >يرجى التاكد من صيغة البريد الاكتروني</em
+                >
+                <em
+                  *ngIf="
+                    validateControl('email') && hasError('email', 'required')
+                  "
+                  >البريد الاكتروني مطلوب</em
+                >
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="password" class="col-form-label col-sm-2"
+                >كملة المرور:</label
+              >
+              <div class="col-md-5">
+                <input
+                  type="password"
+                  id="password"
+                  formControlName="password"
+                  class="form-control"
+                />
+              </div>
+              <div class="col-md-5">
+                <em
+                  *ngIf="
+                    validateControl('password') &&
+                    hasError('password', 'required')
+                  "
+                  >كلمة المرور مطلوبة</em
+                >
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="confirm" class="col-form-label col-sm-2"
+                >تاكيد كلمة المرور:</label
+              >
+              <div class="col-md-5">
+                <input
+                  type="password"
+                  id="confirm"
+                  formControlName="confirm"
+                  class="form-control"
+                />
+              </div>
+              <div class="col-md-5">
+                <em
+                  *ngIf="
+                    validateControl('confirm') &&
+                    hasError('confirm', 'required')
+                  "
+                  >تاكيد كلمة المرور مطلوبة</em
+                >
+                <em *ngIf="hasError('confirm', 'mustMatch')"
+                  >كلمة المرور والتاكيد غير متطابقان</em
+                >
+              </div>
+            </div>
+            <br />
+            <div class="mb-3 row">
+              <div class="col-md-1">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  [disabled]="!registerForm.valid"
+                >
+                  التسجيل
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
