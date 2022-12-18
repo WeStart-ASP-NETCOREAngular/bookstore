@@ -11,7 +11,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMapping();
-builder.Services.AddDataLayer(builder.Configuration);
+builder.Services.AddDataLayer(builder.Configuration)
+    .AddAuthLayer(builder.Configuration);
 builder.Services.AddTransient<IImageUploaderService, ImageUploaderService>();
 builder.Services.AddCors(policy =>
 {
@@ -23,6 +24,7 @@ builder.Services.AddCors(policy =>
         .AllowCredentials());
 });
 
+builder.Services.AddSwaggerConfig();
 
 var app = builder.Build();
 
@@ -37,6 +39,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseCors("CorsPolicy");
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
