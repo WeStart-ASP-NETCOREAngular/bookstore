@@ -1,0 +1,51 @@
+<p>publisher works!</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <form [formGroup]="CreatePublisherForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <input class="form-control" type="text" formControlName="name" />
+        </div>
+
+        <div class="mb-3">
+          <input
+            class="form-control"
+            type="file"
+            formControlName="file"
+            (change)="onFileChange($event)"
+          />
+        </div>
+        <div *ngIf="file.touched && file.invalid">
+          <div *ngIf="file.errors?.['required']">File is required.</div>
+        </div>
+        <div class="mb-4">
+          <img
+            class="img-thumbnail"
+            [src]="imageSrc || 'https://via.placeholder.com/150'"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">اضافة</button>
+      </form>
+      <div class="progress">
+        <div
+          class="progress-bar"
+          role="progressbar"
+          [ngStyle]="{ width: uploadProgress }"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        >
+          {{ uploadProgress }}
+        </div>
+      </div>
+      <div class="mt-4">
+        <ul class="list-group">
+          <ng-container *ngFor="let publisher of publishers | paginate: { itemsPerPage: 10, currentPage: page }">
+            <li class="list-group-item">{{ publisher.name }}</li>
+          </ng-container>
+        </ul>
+
+        <pagination-controls previousLabel="السابق" nextLabel="التالي" (pageChange)="page = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>

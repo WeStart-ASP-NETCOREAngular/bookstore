@@ -14,6 +14,7 @@ import { LoginComponent } from './Components/authentication/login/login.componen
 import { RegisterComponent } from './Components/authentication/register/register.component';
 import { JwtInterceptor } from './services/jwt.interceptor';
 import { ForbiddenComponent } from './Components/forbidden/forbidden.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,8 @@ import { ForbiddenComponent } from './Components/forbidden/forbidden.component';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    NgxPaginationModule
+
   ],
   providers: [
     {
