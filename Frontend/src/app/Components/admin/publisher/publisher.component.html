@@ -39,12 +39,30 @@
       </div>
       <div class="mt-4">
         <ul class="list-group">
-          <ng-container *ngFor="let publisher of publishers | paginate: { itemsPerPage: 10, currentPage: page }">
+          <ng-container
+            *ngFor="
+              let publisher of publishers
+                | paginate
+                  : {
+                      id: 'server',
+                      itemsPerPage: itemsPerPage,
+                      currentPage: page,
+                      totalItems: total
+                    }
+            "
+          >
             <li class="list-group-item">{{ publisher.name }}</li>
           </ng-container>
         </ul>
-
-        <pagination-controls previousLabel="السابق" nextLabel="التالي" (pageChange)="page = $event"></pagination-controls>
+        <div class="my-3" *ngIf="loading">
+          <p class="text-primary">Loading ...</p>
+        </div>
+        <pagination-controls
+          previousLabel="السابق"
+          nextLabel="التالي"
+          (pageChange)="getPage($event)"
+          id="server"
+        ></pagination-controls>
       </div>
     </div>
   </div>

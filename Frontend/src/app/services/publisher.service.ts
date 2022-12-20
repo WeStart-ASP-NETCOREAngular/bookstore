@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -21,15 +21,10 @@ export class PublisherService {
     });
   }
 
-  getPublishers() {
-    return this.httpClient.get<IPublisher[]>(this.baseURL).pipe(
-      map((data) => {
-        data.forEach((item) => {
-          item.logo = environment.baseURL + '/Images/Thumbs/Med/' + item.logo;
-          return item;
-        });
-        return data;
-      })
-    );
+  getPublishers(params: HttpParams) {
+    return this.httpClient.get<IPublisher[]>(this.baseURL, {
+      observe: 'response',
+      params: params,
+    });
   }
 }
