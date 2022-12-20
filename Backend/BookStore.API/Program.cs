@@ -11,6 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMapping();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddDataLayer(builder.Configuration)
     .AddAuthLayer(builder.Configuration);
 builder.Services.AddTransient<IImageUploaderService, ImageUploaderService>();
@@ -21,7 +22,7 @@ builder.Services.AddCors(policy =>
         .WithOrigins("http://localhost:4200")
         .AllowAnyHeader()
         .AllowAnyMethod()
-        .AllowCredentials());
+        .AllowCredentials().WithExposedHeaders("totalAmountOfRecords"));
 });
 
 builder.Services.AddSwaggerConfig();

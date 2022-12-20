@@ -26,10 +26,11 @@ public class PublisherController : ControllerBase
     }
 
     [HttpGet]
-    [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> Get()
-    {
-        return Ok(await _repository.GetAll());
+    //[Authorize(Roles = "Admin")]
+    public async Task<IActionResult> Get([FromQuery] PaginationDTO paginationDTO)
+    {   
+        //HttpContext.Headers -> 1
+        return Ok(await _repository.GetAll(paginationDTO));
     }
 
     [HttpPost]

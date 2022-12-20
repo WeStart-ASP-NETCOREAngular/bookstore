@@ -1,4 +1,5 @@
-﻿using BookStore.API.Models;
+﻿using BookStore.API.DTOs;
+using BookStore.API.Models;
 
 namespace BookStore.API.Interfaces
 {
@@ -7,7 +8,7 @@ namespace BookStore.API.Interfaces
         Task<Publisher> Add(Publisher entity);
         Task<Publisher> Update(Publisher entity);
         Task<Publisher> GetById(int id);
-        Task<List<Publisher>> GetAll();
+        Task<List<Publisher>> GetAll(PaginationDTO paginationDTO);
     }
 
 }
